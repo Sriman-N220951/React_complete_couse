@@ -2,7 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 export default function Navbar(props) {
+
+ 
   return (
+  
+  <div className="container" >
    <ul className="nav">
   <li className="nav-item">
     <a className="nav-link active" aria-current="page" href="/">{props.title}</a>
@@ -17,6 +21,7 @@ export default function Navbar(props) {
     <a className="nav-link disabled" aria-disabled="true">Disabled</a>
   </li>
 </ul>
+  </div>
   )
 }
 Navbar.propTypes={
