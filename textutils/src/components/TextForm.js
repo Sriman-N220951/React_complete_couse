@@ -1,58 +1,59 @@
-import React,{useState} from "react"
-export default function TextForm(props){
+import React, { useState } from 'react';
 
-const handleUpClick = ()=>{
-    //console.log("uppercase was clicked: "+ text);
-    let newText=text.toUpperCase();
-    setText(newText);
-    document.title="upper case clicked";
-   
-}
+export default function TextForm(props) {
+  const [text, setText] = useState('');
 
-const handleClear = ()=>{
-    
-    let newText='';
-    setText(newText);
-}
-const handleOnChange = (event)=>{
-    //console.log("onchange");
-    setText(event.target.value)
-}
-const handleLoClick = ()=>{
-    //console.log("lowercase was clicked: "+ text);
-    let newText=text.toLowerCase();
-    setText(newText);
-}
-const [text,setText] = useState('');
-//setText=("new text"); //correct way to change the state
+  const handleUpClick = () => {
+    setText(text.toUpperCase());
+  };
 
-return(
+  const handleClear = () => {
+    setText('');
+  };
+
+  const handleOnChange = (event) => {
+    setText(event.target.value);
+  };
+
+  const handleLoClick = () => {
+    setText(text.toLowerCase());
+  };
+
+  const wordCount = text.trim().split(/\s+/).filter((element) => element.length !== 0).length;
+
+  return (
     <>
-<div className="container" >
-    <h1>{props.heading}</h1>
-    <div className="md-3">
-       
-        <textarea className="form-control" value={text} onChange={handleOnChange} id="myBox" rows="8"></textarea>
-    </div>
-  <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleUpClick}>convert to upper case</button>
-<button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleLoClick}>convert to lower case</button>
-<button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleClear}>clear</button>
-</div>
-<div className="container my-3">
-<h1>your text summary</h1>
-<p>{text.split(" ").length} words and {text.length} characters </p>
-<p>{0.008 * text.split(" ").length}  MINUTES READ</p>
-<h2>preview</h2>
-<p>{text.length>0?text:"enter something in the textbox to preview it here !!"}</p>
-
-</div>
-
-</>
-
-
-
-
-)
+      <div className="container-fluid textform-container">
+        <h1>{props.heading}</h1>
+        <div className="mb-3">
+          <textarea
+            className="form-control textarea-large"
+            value={text}
+            onChange={handleOnChange}
+            id="myBox"
+            rows="12"
+            placeholder="Type or paste your text here..."
+          ></textarea>
+        </div>
+        <button disabled={text.length === 0} className="btn btn-primary mx-1 my-1" onClick={handleUpClick}>
+          Convert to Upper Case
+        </button>
+        <button disabled={text.length === 0} className="btn btn-primary mx-1 my-1" onClick={handleLoClick}>
+          Convert to Lower Case
+        </button>
+        <button disabled={text.length === 0} className="btn btn-secondary mx-1 my-1" onClick={handleClear}>
+          Clear
+        </button>
+      </div>
+      <div className="container-fluid my-4 text-summary-container">
+        <h1>Your text summary</h1>
+        <p>{wordCount} words and {text.length} characters</p>
+        <p>{0.008 * wordCount} minutes read</p>
+        <h2>Preview</h2>
+        <p>{text.length > 0 ? text : 'Enter something in the textbox to preview it here!'}</p>
+      </div>
+    </>
+  );
 
 
 

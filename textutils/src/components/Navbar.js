@@ -1,35 +1,46 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Navbar(props) {
-
- 
   return (
-  
-  <div className="container" >
-   <ul className="nav">
-  <li className="nav-item">
-    <a className="nav-link active" aria-current="page" href="/">{props.title}</a>
-  </li>
-  <li className="nav-item">
-    <a className="nav-link" href="/">{props.animal}</a>
-  </li>
-  <li className="nav-item">
-    <a className="nav-link" href="/">Link</a>
-  </li>
-  <li className="nav-item">
-    <a className="nav-link disabled" aria-disabled="true">Disabled</a>
-  </li>
-</ul>
-  </div>
-  )
+    <nav className={`navbar navbar-expand-lg navbar-dark navbar-custom`}>
+      <div className="container-fluid">
+        <Link className="navbar-brand" to="/">
+          TEXTUTILS
+        </Link>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0 align-items-center">
+            <li className="nav-item">
+              <Link className="nav-link active" aria-current="page" to="/">
+                {props.title}
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/about" target="_blank" rel="noreferrer">
+                {props.animal}
+              </Link>
+            </li>
+          </ul>
+          <button
+            type="button"
+            className={`btn btn-${props.mode === 'light' ? 'light' : 'secondary'} text-${props.mode === 'light' ? 'dark' : 'light'}`}
+            onClick={props.toggleMode}
+          >
+            {props.mode === 'light' ? 'Enable Dark Mode' : 'Enable Light Mode'}
+          </button>
+        </div>
+      </div>
+    </nav>
+  );
 }
-Navbar.propTypes={
-  title: PropTypes.string.isRequired,
-   animal:  PropTypes.string
-  }
-  Navbar.defaultProps= {
-    title: 'sriman',
-    animal: 'sigma'
-
-  };
